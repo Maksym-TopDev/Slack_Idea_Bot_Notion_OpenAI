@@ -1,52 +1,52 @@
-# Slackアイデア出しbot（Notion連携）
-## 概要
-- アイデアを送信することでOpanAIのAPIを通じてアイデアの要約および分類を行いNotionのデータベースに整理してくれるSlackのbotです。
+# Slack Idea Submission Bot (Notion Integration)
+## Overview
+- This Slack bot summarizes and categorizes submitted ideas via the OpenAI API and organizes them in a Notion database.
 
-## 動作例
+## Example of Operation
 
 https://github.com/user-attachments/assets/f61f9f13-5d09-4693-a22e-6bdba88d8614
 
-## 導入方法
-### 1. SlackのAppを作成する.
+## Installation Instructions
+### 1. Create a Slack App.
 ---
-- [公式ドキュメント](https://tools.slack.dev/bolt-python/ja-jp/getting-started/)をもとにSlackのAppを設定してください。
-- この時"From a manifest"を選択し、[manifest.yaml](manifest.yaml)をもとにアプリを構築してください。
+- Configure your Slack app based on the [official documentation](https://tools.slack.dev/bolt-python/ja-jp/getting-started/).
+- Select "From a manifest" and build the app based on the [manifest.yaml](manifest.yaml).
 
-> ※[manifest.yaml](manifest.yaml)のrequest_urlには適宜自分で用意したURLを設定してください。ローカルで試す場合は[ngrok](https://ngrok.com/)などのローカルホスティングサービスがおすすめです。
-> 
-> ※urlの設定がうまくいかなかった場合は最後の手順まで実行してからurlの設定を行ってください。
+> *Please set the request_url in [manifest.yaml](manifest.yaml) to your own URL. If you're trying it locally, we recommend using a local hosting service such as [ngrok](https://ngrok.com/).
 
-- [.env.sample](env/.env.sample)を参考に`.env`ファイルを作成してください。
-- SlackAppの管理画面のBasic InformationからSigning Secretを、OAuth & PermissionsからBot User OAuth Tokenを取得し、それぞれ`.env`ファイルの`SLACK_SIGNING_SECRET`および`SLACK_BOT_TOKEN`に値を挿入してください。
+> *If you're having trouble setting the URL, try the final step and then set the URL again.
 
-### 2. NotionのAPIを設定する.
+- Create a `.env` file using [.env.sample](env/.env.sample) as a reference.
+- Obtain the Signing Secret from Basic Information in the Slack App admin panel and the Bot User OAuth Token from OAuth & Permissions, and insert these values ​​into the `SLACK_SIGNING_SECRET` and `SLACK_BOT_TOKEN` fields in the `.env` file.
+
+### 2. Set up the Notion API.
 ---
-- Notion APIのインテグレーションキーおよびアイデアのデータを格納したいデータベースIDを取得してください。
-[参考ページはこちらです。](https://qiita.com/ulxsth/items/3434471ac91f8fa311cf)
-- `.env`ファイルの`NOTION_SECRET`および`NOTION_DATABASE_ID`にそれぞれ値を挿入してください。
+- Obtain your Notion API integration key and the database ID where you want to store your idea data.
+[Reference page here. ](https://qiita.com/ulxsth/items/3434471ac91f8fa311cf)
+- Insert the values ​​for `NOTION_SECRET` and `NOTION_DATABASE_ID` in the `.env` file.
 
-### 3. その他の環境変数を用意する
+### 3. Prepare other environment variables
 ---
-- OpenAIのAPIキーを`.env`ファイルの`OPENAI_API_KEY`に挿入してください。
-- アイデアの周知を行いたいSlackチャンネルのIDを`.env`ファイルの`TARGET_CHANNEL`に挿入してください。（[SlackチャンネルのID取得方法](https://qiita.com/YumaInaura/items/0c4f4adb33eb21032c08)）
+- Insert your OpenAI API key into `OPENAI_API_KEY` in the `.env` file.
+- Insert the ID of the Slack channel where you want to share ideas into `TARGET_CHANNEL` in the `.env` file. ([How to obtain a Slack channel ID](https://qiita.com/YumaInaura/items/0c4f4adb33eb21032c08))
 
-### 4. 環境構築
+### 4. Environment Setup
 ---
-- 仮想環境を構築する
+- Create a virtual environment
 ```
 python -m venv venv
 ```
-- 仮想環境をアクティベートする
+- Activate the virtual environment
 ```
 source venv/bin/activate
 ```
-- 必要なライブラリをインストールする
+- Install required libraries
 ```
 pip install -r requirements.txt
 ```
-### 5. 実行
+### 5. Execution
 ---
 ```
 python app.py
 ```
-- デフォルトではlocalhostの3000番に実行されます。それをもとに[ngrok](https://ngrok.com/)などのローカルホスティングサービスでpublicにurlを公開してください。
+- By default, it will be executed on localhost port 3000. Use this URL to publicly publish it using a local hosting service such as [ngrok](https://ngrok.com/).
