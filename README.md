@@ -2,10 +2,6 @@
 ## Overview
 - This Slack bot summarizes and categorizes submitted ideas via the OpenAI API and organizes them in a Notion database.
 
-## Example of Operation
-
-https://github.com/user-attachments/assets/f61f9f13-5d09-4693-a22e-6bdba88d8614
-
 ## Installation Instructions
 ### 1. Create a Slack App.
 ---
